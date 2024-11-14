@@ -14,6 +14,42 @@
  * =========================================================
  */
 
+synchronized public void GUI_draw(PApplet appc, GWinData data) { //_CODE_:GUI:957073:
+  appc.background(230);
+} //_CODE_:GUI:957073:
+
+public void Pause_Click(GButton source, GEvent event) { //_CODE_:Pause:413731:
+  println("Pause - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:Pause:413731:
+
+public void Clear_Click(GButton source, GEvent event) { //_CODE_:Clear:949067:
+  println("Clear - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:Clear:949067:
+
+public void CustomerInflowSlider(GSlider source, GEvent event) { //_CODE_:CustomerInflow:343922:
+  println("slider1 - GSlider >> GEvent." + event + " @ " + millis());
+} //_CODE_:CustomerInflow:343922:
+
+public void CashierSpeedSlider(GSlider source, GEvent event) { //_CODE_:CashierSpeed:299747:
+  println("slider1 - GSlider >> GEvent." + event + " @ " + millis());
+} //_CODE_:CashierSpeed:299747:
+
+public void CustomerPatienceSlider(GSlider source, GEvent event) { //_CODE_:CustomerPatience:911959:
+  println("CustomerPatience - GSlider >> GEvent." + event + " @ " + millis());
+} //_CODE_:CustomerPatience:911959:
+
+public void CustomerAggressionSlider(GSlider source, GEvent event) { //_CODE_:CustomerAggression:271313:
+  println("slider2 - GSlider >> GEvent." + event + " @ " + millis());
+} //_CODE_:CustomerAggression:271313:
+
+public void CashierAmountText(GTextField source, GEvent event) { //_CODE_:CashierAmount:904763:
+  println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
+} //_CODE_:CashierAmount:904763:
+
+public void PresetsDropdown(GDropList source, GEvent event) { //_CODE_:Presets:409116:
+  println("Presets - GDropList >> GEvent." + event + " @ " + millis());
+} //_CODE_:Presets:409116:
+
 
 
 // Create all the GUI controls. 
@@ -23,7 +59,106 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
+  GUI = GWindow.getWindow(this, "Controls", 0, 0, 440, 300, JAVA2D);
+  GUI.noLoop();
+  GUI.setActionOnClose(G4P.KEEP_OPEN);
+  GUI.addDrawHandler(this, "GUI_draw");
+  Pause = new GButton(GUI, 240, 250, 80, 30);
+  Pause.setText("Pause");
+  Pause.setLocalColorScheme(GCScheme.RED_SCHEME);
+  Pause.addEventHandler(this, "Pause_Click");
+  Clear = new GButton(GUI, 340, 250, 80, 30);
+  Clear.setText("Clear");
+  Clear.setLocalColorScheme(GCScheme.YELLOW_SCHEME);
+  Clear.addEventHandler(this, "Clear_Click");
+  CustomerInflow = new GSlider(GUI, 20, 45, 100, 40, 10.0);
+  CustomerInflow.setLimits(2.0, 0.1, 10.0);
+  CustomerInflow.setNumberFormat(G4P.DECIMAL, 2);
+  CustomerInflow.setOpaque(false);
+  CustomerInflow.addEventHandler(this, "CustomerInflowSlider");
+  CustomerSliderLabel = new GLabel(GUI, 20, 20, 100, 20);
+  CustomerSliderLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  CustomerSliderLabel.setText("Customer Inflow");
+  CustomerSliderLabel.setOpaque(false);
+  CashierLabel = new GLabel(GUI, 170, 100, 100, 20);
+  CashierLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  CashierLabel.setText("Cashier Speed");
+  CashierLabel.setLocalColorScheme(GCScheme.GOLD_SCHEME);
+  CashierLabel.setOpaque(false);
+  CashierSpeed = new GSlider(GUI, 170, 120, 100, 50, 10.0);
+  CashierSpeed.setShowValue(true);
+  CashierSpeed.setLimits(3, 1, 5);
+  CashierSpeed.setNbrTicks(5);
+  CashierSpeed.setStickToTicks(true);
+  CashierSpeed.setShowTicks(true);
+  CashierSpeed.setNumberFormat(G4P.INTEGER, 0);
+  CashierSpeed.setLocalColorScheme(GCScheme.YELLOW_SCHEME);
+  CashierSpeed.setOpaque(false);
+  CashierSpeed.addEventHandler(this, "CashierSpeedSlider");
+  CustomerPatience = new GSlider(GUI, 170, 40, 100, 50, 10.0);
+  CustomerPatience.setShowValue(true);
+  CustomerPatience.setLimits(4, 1, 5);
+  CustomerPatience.setNbrTicks(5);
+  CustomerPatience.setShowTicks(true);
+  CustomerPatience.setNumberFormat(G4P.INTEGER, 0);
+  CustomerPatience.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  CustomerPatience.setOpaque(false);
+  CustomerPatience.addEventHandler(this, "CustomerPatienceSlider");
+  CustomerAggression = new GSlider(GUI, 320, 40, 100, 50, 10.0);
+  CustomerAggression.setShowValue(true);
+  CustomerAggression.setLimits(1, 1, 5);
+  CustomerAggression.setNbrTicks(5);
+  CustomerAggression.setShowTicks(true);
+  CustomerAggression.setNumberFormat(G4P.INTEGER, 0);
+  CustomerAggression.setLocalColorScheme(GCScheme.RED_SCHEME);
+  CustomerAggression.setOpaque(false);
+  CustomerAggression.addEventHandler(this, "CustomerAggressionSlider");
+  CustomerPatienceLabel = new GLabel(GUI, 160, 20, 120, 20);
+  CustomerPatienceLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  CustomerPatienceLabel.setText("Customer Patience");
+  CustomerPatienceLabel.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  CustomerPatienceLabel.setOpaque(false);
+  CustomerAggressionLabel = new GLabel(GUI, 305, 20, 130, 20);
+  CustomerAggressionLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  CustomerAggressionLabel.setText("Customer Aggression");
+  CustomerAggressionLabel.setLocalColorScheme(GCScheme.RED_SCHEME);
+  CustomerAggressionLabel.setOpaque(false);
+  CashierAmountLabel = new GLabel(GUI, 20, 100, 100, 20);
+  CashierAmountLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  CashierAmountLabel.setText("Cashier Amount");
+  CashierAmountLabel.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+  CashierAmountLabel.setOpaque(false);
+  CashierAmount = new GTextField(GUI, 20, 130, 100, 30, G4P.SCROLLBARS_NONE);
+  CashierAmount.setText("1");
+  CashierAmount.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+  CashierAmount.setOpaque(true);
+  CashierAmount.addEventHandler(this, "CashierAmountText");
+  Presets = new GDropList(GUI, 325, 120, 90, 100, 4, 10);
+  Presets.setItems(loadStrings("list_409116"), 0);
+  Presets.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  Presets.addEventHandler(this, "PresetsDropdown");
+  PresetsLabel = new GLabel(GUI, 330, 100, 80, 20);
+  PresetsLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  PresetsLabel.setText("Presets");
+  PresetsLabel.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  PresetsLabel.setOpaque(false);
+  GUI.loop();
 }
 
 // Variable declarations 
 // autogenerated do not edit
+GWindow GUI;
+GButton Pause; 
+GButton Clear; 
+GSlider CustomerInflow; 
+GLabel CustomerSliderLabel; 
+GLabel CashierLabel; 
+GSlider CashierSpeed; 
+GSlider CustomerPatience; 
+GSlider CustomerAggression; 
+GLabel CustomerPatienceLabel; 
+GLabel CustomerAggressionLabel; 
+GLabel CashierAmountLabel; 
+GTextField CashierAmount; 
+GDropList Presets; 
+GLabel PresetsLabel; 

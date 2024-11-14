@@ -9,6 +9,7 @@ void setup(){
   size(800,700);
   background(255,255,255);
   rect(50,550, 700,50);    //Counter
+  createGUI();
 }
 
 void draw(){
