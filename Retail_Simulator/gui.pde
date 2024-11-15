@@ -19,35 +19,35 @@ synchronized public void GUI_draw(PApplet appc, GWinData data) { //_CODE_:GUI:95
 } //_CODE_:GUI:957073:
 
 public void Pause_Click(GButton source, GEvent event) { //_CODE_:Pause:413731:
-  println("Pause - GButton >> GEvent." + event + " @ " + millis());
+  //Pause;
 } //_CODE_:Pause:413731:
 
 public void Clear_Click(GButton source, GEvent event) { //_CODE_:Clear:949067:
-  println("Clear - GButton >> GEvent." + event + " @ " + millis());
+  //Clear;
 } //_CODE_:Clear:949067:
 
 public void CustomerInflowSlider(GSlider source, GEvent event) { //_CODE_:CustomerInflow:343922:
-  println("slider1 - GSlider >> GEvent." + event + " @ " + millis());
+  //CustomerInflow;
 } //_CODE_:CustomerInflow:343922:
 
 public void CashierSpeedSlider(GSlider source, GEvent event) { //_CODE_:CashierSpeed:299747:
-  println("slider1 - GSlider >> GEvent." + event + " @ " + millis());
+  //CashierSpeed
 } //_CODE_:CashierSpeed:299747:
 
 public void CustomerPatienceSlider(GSlider source, GEvent event) { //_CODE_:CustomerPatience:911959:
-  println("CustomerPatience - GSlider >> GEvent." + event + " @ " + millis());
+  //CustomerPatience;
 } //_CODE_:CustomerPatience:911959:
 
 public void CustomerAggressionSlider(GSlider source, GEvent event) { //_CODE_:CustomerAggression:271313:
-  println("slider2 - GSlider >> GEvent." + event + " @ " + millis());
+  //CustomerAggression
 } //_CODE_:CustomerAggression:271313:
 
 public void CashierAmountText(GTextField source, GEvent event) { //_CODE_:CashierAmount:904763:
-  println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
+  //CashierAmount
 } //_CODE_:CashierAmount:904763:
 
 public void PresetsDropdown(GDropList source, GEvent event) { //_CODE_:Presets:409116:
-  println("Presets - GDropList >> GEvent." + event + " @ " + millis());
+  //Presets;
 } //_CODE_:Presets:409116:
 
 
