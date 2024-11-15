@@ -20,7 +20,6 @@ class Customer {
   void drawCustomer() {
     fill(this.colour);
     circle(this.location.x, this.location.y, this.diameter);
-    noFill();
   }
   
   

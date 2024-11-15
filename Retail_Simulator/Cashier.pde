@@ -1,36 +1,37 @@
 class Cashier {
   //FIELDS
-  int cashierAmount;
   color colour;
   PVector pos;
   float diameter;
   boolean isAsleep;
   int cashierSpeed;
+  int lastCustomerTime;
 
   //CONSTRUCTOR
-  Cashier(boolean isAsleep, int cashierAmount, PVector p, float d) {
-    this.isAsleep = isAsleep;
-    this.cashierAmount = cashierAmount;
+  Cashier(PVector p, float d, boolean isAsleep, int t) {
     this.colour = blue;  // Default color for awake cashier
     this.pos = p;
     this.diameter = d;
+    this.isAsleep = isAsleep;
     this.cashierSpeed = 3; // Default speed
+    this.lastCustomerTime = t;
   }
 
   //METHODS
   void drawCashier() {
     if (this.isAsleep) {
       this.colour = purple;  // Purple if asleep
-    } else {
+    } 
+    else {
       this.colour = blue;    // Blue if awake
     }
+    
     fill(colour);
-    stroke(colour);
     circle(pos.x, pos.y, diameter);
   }
 
   void increaseSpeed() {
-    cashierSpeed++;
+    cashierSpeed++; //don't need this, gui will control
   }
 
   float timeToCheckOut() {
@@ -44,4 +45,5 @@ class Cashier {
       this.isAsleep = false;
     }
   }
+  
 }
