@@ -71,7 +71,7 @@ public void createGUI(){
   Clear.setText("Clear");
   Clear.setLocalColorScheme(GCScheme.YELLOW_SCHEME);
   Clear.addEventHandler(this, "Clear_Click");
-  CustomerInflow = new GSlider(GUI, 20, 45, 100, 40, 10.0);
+  CustomerInflow = new GSlider(GUI, 20, 44, 100, 40, 10.0);
   CustomerInflow.setLimits(2.0, 0.1, 10.0);
   CustomerInflow.setNumberFormat(G4P.DECIMAL, 2);
   CustomerInflow.setOpaque(false);
@@ -95,7 +95,7 @@ public void createGUI(){
   CashierSpeed.setLocalColorScheme(GCScheme.YELLOW_SCHEME);
   CashierSpeed.setOpaque(false);
   CashierSpeed.addEventHandler(this, "CashierSpeedSlider");
-  CustomerPatience = new GSlider(GUI, 170, 40, 100, 50, 10.0);
+  CustomerPatience = new GSlider(GUI, 170, 39, 100, 50, 10.0);
   CustomerPatience.setShowValue(true);
   CustomerPatience.setLimits(4, 1, 5);
   CustomerPatience.setNbrTicks(5);
@@ -104,7 +104,7 @@ public void createGUI(){
   CustomerPatience.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   CustomerPatience.setOpaque(false);
   CustomerPatience.addEventHandler(this, "CustomerPatienceSlider");
-  CustomerAggression = new GSlider(GUI, 320, 40, 100, 50, 10.0);
+  CustomerAggression = new GSlider(GUI, 320, 39, 100, 50, 10.0);
   CustomerAggression.setShowValue(true);
   CustomerAggression.setLimits(1, 1, 5);
   CustomerAggression.setNbrTicks(5);

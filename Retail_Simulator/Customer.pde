@@ -1,16 +1,16 @@
 class Customer {
   //FIELDS
-  PVector location;
-  int diameter;
   color colour;
+  PVector pos;
+  int diameter;
   int patience;
   int aggression;
   
   //CONSTRUCTOR
-  Customer(PVector xy, int d, color c, int p, int a) {    
-   this.location = xy;
+  Customer(PVector xy, int d, int p, int a) {    
+   this.colour = yellow;  // Default color for customer
+   this.pos = xy;
    this.diameter = d;
-   this.colour = c;
    this.patience = p;
    this.aggression = a;
    
@@ -19,7 +19,11 @@ class Customer {
   //METHODS
   void drawCustomer() {
     fill(this.colour);
-    circle(this.location.x, this.location.y, this.diameter);
+    circle(this.pos.x, this.pos.y, this.diameter);
+  }
+  
+  void moveAhead() {
+    //a
   }
   
   

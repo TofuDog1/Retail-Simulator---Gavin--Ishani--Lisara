@@ -6,15 +6,17 @@ class Cashier {
   boolean isAsleep;
   int cashierSpeed;
   int lastCustomerTime;
+  ArrayList <Customer> customersInLine;
 
   //CONSTRUCTOR
-  Cashier(PVector p, float d, boolean isAsleep, int t) {
+  Cashier(PVector p, float d, int t) {
     this.colour = blue;  // Default color for awake cashier
     this.pos = p;
     this.diameter = d;
-    this.isAsleep = isAsleep;
+    this.isAsleep = false; //Awake by default
     this.cashierSpeed = 3; // Default speed
     this.lastCustomerTime = t;
+    this.customersInLine = new ArrayList <Customer>();
   }
 
   //METHODS
@@ -41,7 +43,8 @@ class Cashier {
   void checkIfIdle(float idleTime) {
     if (idleTime > 6) {  // If cashier has been idle for more than 6 seconds
       this.isAsleep = true;
-    } else {
+    } 
+    else {
       this.isAsleep = false;
     }
   }
