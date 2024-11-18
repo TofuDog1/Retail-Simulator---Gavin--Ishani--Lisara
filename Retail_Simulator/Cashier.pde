@@ -31,6 +31,9 @@ class Cashier {
     fill(colour);
     circle(pos.x, pos.y, diameter);
   }
+  
+  void checkOut(Customer cust, float checkOutTime){
+  }
 
   void increaseSpeed() {
     cashierSpeed++; //don't need this, gui will control

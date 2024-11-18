@@ -40,37 +40,55 @@ void draw() {
     int cashierChosen = int(random(0,numCashiers));                  //Picking a random cashier (implement checking how long the line is for each cashier later)
     
     try{
-      float customerAhead = cashiers.get(cashierChosen).customersInLine.get( cashiers.get(cashierChosen).customersInLine.size()-1 ).pos.y;  //Getting the y coord of the customer ahead in line
+      float customerAheadY = cashiers.get(cashierChosen).customersInLine.get( cashiers.get(cashierChosen).customersInLine.size()-1 ).pos.y;  //Getting the y coord of the customer ahead in line
       //cashiers.get(cashierChosen).customersInLine  gets the cashier and its customersinline arraylist
       //.get( cashiers.get(cashierChosen).customersInLine.size()-1 ).pos.y  sees how long the customersinline arraylist is and gets the y coordinate of the last element (customer ahead)
-      cashiers.get(cashierChosen).customersInLine.add(new Customer( new PVector (cashiers.get(cashierChosen).pos.x, customerAhead-75), diameter, customerPatience, customerAggression));
+      if(customerAheadY >= 75){   //Doesn't draw a customer if the distance between the would be customer and the customer ahead of it is under 75
+        cashiers.get(cashierChosen).customersInLine.add(new Customer( new PVector (cashiers.get(cashierChosen).pos.x, -diameter*0.5), diameter, customerPatience, customerAggression)); 
+      }
     }
-    
+      
     catch(Exception e){
-      cashiers.get(cashierChosen).customersInLine.add(new Customer( new PVector (cashiers.get(cashierChosen).pos.x, 500), diameter, customerPatience, customerAggression)); //Draws it at 500 if there is no customer ahead in line
+      cashiers.get(cashierChosen).customersInLine.add(new Customer( new PVector (cashiers.get(cashierChosen).pos.x, -diameter*0.5), diameter, customerPatience, customerAggression)); //Draws a customer if there is no customer ahead in line
     }
   }
   
   
-  for(int i = 0; i < cashiers.size(); i++) {
+  for(Cashier cash : cashiers) {
     // Calculate idle time based on the last customer time
-    float idleTime = (millis() - cashiers.get(i).lastCustomerTime) / 1000.0; // convert to seconds
+    float idleTime = (millis() - cash.lastCustomerTime) / 1000.0; // convert to seconds
    
     // Update cashier state based on idle time
-    cashiers.get(i).checkIfIdle(idleTime);
+    cash.checkIfIdle(idleTime);
    
     // Draw the cashier based on current state
-    cashiers.get(i).drawCashier();
+    cash.drawCashier();
    
     // Simulates serving a customer every few seconds to reset idle time
     if (frameCount % 120 == 0) {  // Simulate customer every 120 frames (~2 seconds)
-      cashiers.get(i).lastCustomerTime = millis(); // Reset idle timer
-      cashiers.get(i).isAsleep = false;    // Wake up cashier if a customer arrives
+      cash.lastCustomerTime = millis(); // Reset idle timer
+      cash.isAsleep = false;    // Wake up cashier if a customer arrives
     }
     
-    for(int j = 0; j < cashiers.get(i).customersInLine.size(); j++) {
-      cashiers.get(i).customersInLine.get(j).drawCustomer();  //Draws all the customers
-      cashiers.get(i).customersInLine.get(j).moveAhead();
+    
+    for(Customer cust : cash.customersInLine) {
+      try{
+        float customerAheadY = cash.customersInLine.get( cash.customersInLine.indexOf(cust)-1 ).pos.y;  //Getting the y coord of the customer ahead in line
+        //cash.customersInLine.get  gets the cashier and its customersinline arraylist
+        //.get( cash.customersInLine.indexOf(cust)-1 ).pos.y  gets the y coordinate of the element ahead of the customer (customer ahead in line)
+        if(customerAheadY > cust.pos.y+75){
+          cust.moveAhead();
+        }
+      }
+      
+      catch(Exception e){
+        if(cust.pos.y <= 500){
+          cust.moveAhead(); //Draws it at 500 if there is no customer ahead in line
+          cash.checkOut(cust, cash.timeToCheckOut());
+        }
+      }
+      
+      cust.drawCustomer();  //Draws all the customers
     }
   }
  
@@ -82,7 +100,6 @@ void draw() {
 //Customers pick the cashier with the shortest line
 //GUI affects the variables
 //Live update the variables of each cashier/customer based off the GUI
-//Customers move fluidly
 //Cashiers can fall asleep
 //Customers can fight the cashiers
 //probably more

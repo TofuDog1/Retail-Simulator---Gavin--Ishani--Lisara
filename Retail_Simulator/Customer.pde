@@ -23,7 +23,7 @@ class Customer {
   }
   
   void moveAhead() {
-    //a
+    this.pos.y += 5;
   }
   
   
