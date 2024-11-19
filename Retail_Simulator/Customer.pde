@@ -17,13 +17,19 @@ class Customer {
   }
   
   //METHODS
-  void drawCustomer() {
+  void drawCustomer(float cashierX) {
     fill(this.colour);
+    pos.x = cashierX;
     circle(this.pos.x, this.pos.y, this.diameter);
   }
   
   void moveAhead() {
-    this.pos.y += 5;
+    this.pos.y += 4;
+  }
+  
+  void customerUpdate() {
+    this.patience = customerPatience;
+    this.aggression = customerAggression;
   }
   
   

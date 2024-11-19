@@ -4,7 +4,7 @@ class Cashier {
   PVector pos;
   float diameter;
   boolean isAsleep;
-  int cashierSpeed;
+  int speed;
   int lastCustomerTime;
   ArrayList <Customer> customersInLine;
 
@@ -14,7 +14,7 @@ class Cashier {
     this.pos = p;
     this.diameter = d;
     this.isAsleep = false; //Awake by default
-    this.cashierSpeed = 3; // Default speed
+    this.speed = 3; // Default speed
     this.lastCustomerTime = t;
     this.customersInLine = new ArrayList <Customer>();
   }
@@ -31,16 +31,16 @@ class Cashier {
     fill(colour);
     circle(pos.x, pos.y, diameter);
   }
-  
-  void checkOut(Customer cust, float checkOutTime){
-  }
 
-  void increaseSpeed() {
-    cashierSpeed++; //don't need this, gui will control
+  void cashierUpdate() {
+    this.speed = cashierSpeed;
   }
 
   float timeToCheckOut() {
     return random(3 - (0.5 * cashierSpeed), 8 - (0.5 * cashierSpeed));
+  }
+  
+  void checkOut(Customer cust, float checkOutTime){
   }
 
   void checkIfIdle(float idleTime) {

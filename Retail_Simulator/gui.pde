@@ -19,31 +19,34 @@ synchronized public void GUI_draw(PApplet appc, GWinData data) { //_CODE_:GUI:95
 } //_CODE_:GUI:957073:
 
 public void Pause_Click(GButton source, GEvent event) { //_CODE_:Pause:413731:
-  //Pause;
+  paused = !paused;
 } //_CODE_:Pause:413731:
 
 public void Clear_Click(GButton source, GEvent event) { //_CODE_:Clear:949067:
-  //Clear;
+  //Clear all the customers;
 } //_CODE_:Clear:949067:
 
 public void CustomerInflowSlider(GSlider source, GEvent event) { //_CODE_:CustomerInflow:343922:
-  //CustomerInflow;
+  customerInflow = CustomerInflow.getValueF();
 } //_CODE_:CustomerInflow:343922:
 
 public void CashierSpeedSlider(GSlider source, GEvent event) { //_CODE_:CashierSpeed:299747:
-  //CashierSpeed
+  cashierSpeed = CashierSpeed.getValueI();
 } //_CODE_:CashierSpeed:299747:
 
 public void CustomerPatienceSlider(GSlider source, GEvent event) { //_CODE_:CustomerPatience:911959:
-  //CustomerPatience;
+  customerPatience = CustomerPatience.getValueI();
 } //_CODE_:CustomerPatience:911959:
 
 public void CustomerAggressionSlider(GSlider source, GEvent event) { //_CODE_:CustomerAggression:271313:
-  //CustomerAggression
+  customerAggression = CustomerAggression.getValueI();
 } //_CODE_:CustomerAggression:271313:
 
 public void CashierAmountText(GTextField source, GEvent event) { //_CODE_:CashierAmount:904763:
-  //CashierAmount
+  int cashierAmount = int(CashierAmount.getText());
+  if(cashierAmount > 0 && cashierAmount <= 6){
+    numCashiers = cashierAmount;
+  }
 } //_CODE_:CashierAmount:904763:
 
 public void PresetsDropdown(GDropList source, GEvent event) { //_CODE_:Presets:409116:
@@ -89,7 +92,6 @@ public void createGUI(){
   CashierSpeed.setShowValue(true);
   CashierSpeed.setLimits(3, 1, 5);
   CashierSpeed.setNbrTicks(5);
-  CashierSpeed.setStickToTicks(true);
   CashierSpeed.setShowTicks(true);
   CashierSpeed.setNumberFormat(G4P.INTEGER, 0);
   CashierSpeed.setLocalColorScheme(GCScheme.YELLOW_SCHEME);
