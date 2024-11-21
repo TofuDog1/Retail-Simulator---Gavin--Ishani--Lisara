@@ -7,27 +7,22 @@ class Cashier {
   int speed;
   int lastCustomerTime;
   ArrayList <Customer> customersInLine;
+  ArrayList <Customer> customersLeaving;
 
   //CONSTRUCTOR
   Cashier(PVector p, float d, int t) {
-    this.colour = blue;  // Default color for awake cashier
+    this.colour = blue;     // Default color for awake cashier
     this.pos = p;
     this.diameter = d;
-    this.isAsleep = false; //Awake by default
-    this.speed = 3; // Default speed
+    this.isAsleep = false;  // Awake by default
+    this.speed = 3;         // Default speed
     this.lastCustomerTime = t;
     this.customersInLine = new ArrayList <Customer>();
+    this.customersLeaving = new ArrayList <Customer>();
   }
 
   //METHODS
   void drawCashier() {
-    if (this.isAsleep) {
-      this.colour = purple;  // Purple if asleep
-    } 
-    else {
-      this.colour = blue;    // Blue if awake
-    }
-    
     fill(colour);
     circle(pos.x, pos.y, diameter);
   }
@@ -37,18 +32,42 @@ class Cashier {
   }
 
   float timeToCheckOut() {
-    return random(3 - (0.5 * cashierSpeed), 8 - (0.5 * cashierSpeed));
-  }
-  
-  void checkOut(Customer cust, float checkOutTime){
+    return random(2 - cashierSpeed, 6 - cashierSpeed);
   }
 
-  void checkIfIdle(float idleTime) {
-    if (idleTime > 6) {  // If cashier has been idle for more than 6 seconds
-      this.isAsleep = true;
+  void checkIfIdle() {
+    if (customersInLine.size() == 0) {  // If there are no customers in line
+      if (red(colour) < 155){
+        if (int(random(0,2)) == 0){
+          colour += color(1,0,0);
+        }
+      }
+      
+      else {
+        this.isAsleep = true;
+        sleep();
+      }
     } 
-    else {
+    
+    else {  // Waking up when customers enter
       this.isAsleep = false;
+      colour = blue;
+    }
+  }
+  
+  void sleep(){
+    fill(purple);
+    if(frameCount % 60 < 20){  // Animating the ZZZ
+      textSize(15);
+      text("Z", pos.x+10, pos.y-10);
+    }
+    else if(frameCount % 60 < 40){
+      textSize(20);
+      text("Z", pos.x+20, pos.y-20);
+    }
+    else{
+      textSize(25);
+      text("Z", pos.x+30, pos.y-30);
     }
   }
   

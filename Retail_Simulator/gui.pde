@@ -19,11 +19,19 @@ synchronized public void GUI_draw(PApplet appc, GWinData data) { //_CODE_:GUI:95
 } //_CODE_:GUI:957073:
 
 public void Pause_Click(GButton source, GEvent event) { //_CODE_:Pause:413731:
+  if(paused == true){
+    Pause.setText("Unpause");
+    Pause.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  } 
+  else {
+    Pause.setText("Pause"); 
+    Pause.setLocalColorScheme(GCScheme.RED_SCHEME);
+  }
   paused = !paused;
 } //_CODE_:Pause:413731:
 
 public void Clear_Click(GButton source, GEvent event) { //_CODE_:Clear:949067:
-  //Clear all the customers;
+  clear();
 } //_CODE_:Clear:949067:
 
 public void CustomerInflowSlider(GSlider source, GEvent event) { //_CODE_:CustomerInflow:343922:
@@ -44,8 +52,11 @@ public void CustomerAggressionSlider(GSlider source, GEvent event) { //_CODE_:Cu
 
 public void CashierAmountText(GTextField source, GEvent event) { //_CODE_:CashierAmount:904763:
   int cashierAmount = int(CashierAmount.getText());
-  if(cashierAmount > 0 && cashierAmount <= 6){
+  if(cashierAmount > 0 && cashierAmount <= 7){
     numCashiers = cashierAmount;
+  }
+  else if(cashierAmount > 7){
+    numCashiers = 7;
   }
 } //_CODE_:CashierAmount:904763:
 

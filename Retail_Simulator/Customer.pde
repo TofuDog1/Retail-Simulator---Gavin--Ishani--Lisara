@@ -6,6 +6,12 @@ class Customer {
   int patience;
   int aggression;
   
+  boolean checkedOut;
+  int timeArrivedAtCashier;
+  float checkingOutTime;
+  boolean leaving;
+  int leftAmount;
+  
   //CONSTRUCTOR
   Customer(PVector xy, int d, int p, int a) {    
    this.colour = yellow;  // Default color for customer
@@ -14,17 +20,36 @@ class Customer {
    this.patience = p;
    this.aggression = a;
    
+   this.checkedOut = false;
+   this.leaving = false;
+   this.leftAmount = 0;
+   
   }
   
   //METHODS
   void drawCustomer(float cashierX) {
-    fill(this.colour);
-    pos.x = cashierX;
-    circle(this.pos.x, this.pos.y, this.diameter);
+    fill(colour);
+    this.pos.x = cashierX - this.leftAmount;
+    circle(pos.x, pos.y, diameter);
   }
   
   void moveAhead() {
-    this.pos.y += 4;
+    this.pos.y += 5;
+  }
+  
+  void checkOut(int time){
+    this.checkedOut = true;
+    if((time - this.timeArrivedAtCashier) / 1000 > checkingOutTime) {
+      this.leaving = true;
+    }
+  }
+  
+  void leaveLeft(){
+    this.leftAmount += 2.5;
+  }
+  
+  void leaveUp(){
+    this.pos.y -= 2.5;
   }
   
   void customerUpdate() {
