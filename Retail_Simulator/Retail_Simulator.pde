@@ -87,7 +87,7 @@ void draw() {
         }
         
         else {    // If there isn't a customer ahead in line
-          if (cust.pos.y < 500 && cust.checkedOut == false) {
+          if (cust.pos.y <= 500 && cust.checkedOut == false) {
             cust.moveAhead();  // Moves forward if there is no customer ahead in line and it hasn't reached the cashier yet
           }
           
@@ -140,10 +140,3 @@ void draw() {
     }
   }
 }
-
-//Features needed eventually
-//Customers pick the cashier with the shortest line maybe  (done?)
-//Customers can fight the cashiers
-//Presets  (done?)
-//Replace aggr with speed??
-//probably more

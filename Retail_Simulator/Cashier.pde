@@ -28,7 +28,7 @@ class Cashier {
   }
   
   void generateCustomer() {
-    int customerAddChance = int(random(0, (10.25-customerInflow)*30));  // Random chance of adding a customer every frame based off the inflow rate
+    int customerAddChance = int(random(0, (10.25-customerInflow)*60));  // Random chance of adding a customer every frame based off the inflow rate
     if (customerAddChance == 0) {
       
       try{
@@ -39,10 +39,10 @@ class Cashier {
       }
         
       catch (Exception e) {  // If there is no customer ahead in line
-        //try{  // Avoids errors from changing the cashier amount in the middle of generating customers
+        try{  // Avoids errors in the middle of generating customers just in case
           this.customersInLine.add(new Customer( new PVector (this.pos.x, -diameter*0.5), diameter, customerPatience, customerSpeed)); //Draws a customer if there is no customer ahead in line
-        //}
-        //catch (Exception f) {}
+        }
+        catch (Exception f) {}
       }
     }
   }
@@ -57,9 +57,9 @@ class Cashier {
 
   void checkIfIdle() {
     if (customersInLine.size() == 0) {  // If there are no customers in line
-      if (red(colour) < red(purple)) {   // Keeps adding red until the cashier turns purple
+      if (red(colour) < red(purple)) {  // Keeps adding red until the cashier turns purple
         if (int(random(0,2)) == 0) {
-          colour += color(1,0,0);
+          this.colour += color(1,0,0);
         }
       }
       

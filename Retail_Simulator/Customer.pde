@@ -11,7 +11,7 @@ class Customer {
   int timeArrivedAtCashier;
   float checkingOutTime;
   boolean leaving;
-  int leftAmount;
+  float leftAmount;
   
   // CONSTRUCTOR
   Customer (PVector xy, int d, int p, float s) {    
@@ -41,8 +41,8 @@ class Customer {
   void wait (ArrayList<Customer> customersInLine, ArrayList<Customer> customersLeaving, int index) {
     if (green(colour) > green(red)) {  // Gets angrier if not already maximum amount of angry
       if (int(random(0,patience)) == 0) {
-        colour -= green(-1);
-        colour = color(red(colour), green(colour), 0);
+        this.colour -= green(-1);
+        this.colour = color(red(colour), green(colour), 0);
       }
     }    
     
@@ -60,16 +60,16 @@ class Customer {
         }
       }
       
-      if (tooClose == false && index != 0 && index != 1) {  // Make the customer leave if the customer leaving would not bump into another customer
-      // Make the customer leave if they aren't first/second in line
-        checkedOut = true;
-        leaving = true;
+      if (tooClose == false && index != 0 && index != 1) {  // Makes the customer leave if the customer leaving would not bump into another customer
+      // Makes the customer leave if they aren't first/second in line
+        this.checkedOut = true;
+        this.leaving = true;
       }
     }
     
   }
   
-  void checkOut (int time) {
+  void checkOut (int time) {  // Checks if the time spent at the cashier is over the checking out time
     this.checkedOut = true;
     if ((time - this.timeArrivedAtCashier) / 1000 > checkingOutTime) {
       this.leaving = true;

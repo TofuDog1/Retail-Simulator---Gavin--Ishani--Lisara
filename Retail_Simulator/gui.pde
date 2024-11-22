@@ -78,8 +78,8 @@ public void PresetsDropdown(GDropList source, GEvent event) { //_CODE_:Presets:4
     case "Slow Tuesday":
     customerPatience = 5;
     customerSpeed = 1;
-    cashierSpeed = 1;
-    customerInflow = 1;
+    cashierSpeed = 2;
+    customerInflow = 0.01;
     break;
   
     case "Normal Day":
@@ -87,6 +87,14 @@ public void PresetsDropdown(GDropList source, GEvent event) { //_CODE_:Presets:4
     customerSpeed = 5;
     cashierSpeed = 3;
     customerInflow = 5;
+    break;
+    
+    case "Zombie Apocalypse":
+    numCashiers = 7;
+    customerPatience = 5;
+    customerSpeed = 1;
+    cashierSpeed = 1;
+    customerInflow = 10;
     break;
   }
   
@@ -118,7 +126,7 @@ public void createGUI(){
   Clear.setLocalColorScheme(GCScheme.YELLOW_SCHEME);
   Clear.addEventHandler(this, "Clear_Click");
   CustomerInflow = new GSlider(GUI, 20, 44, 100, 40, 10.0);
-  CustomerInflow.setLimits(2.0, 0.1, 10.0);
+  CustomerInflow.setLimits(2.0, 0.01, 10.0);
   CustomerInflow.setNumberFormat(G4P.DECIMAL, 2);
   CustomerInflow.setOpaque(false);
   CustomerInflow.addEventHandler(this, "CustomerInflowSlider");
@@ -177,7 +185,7 @@ public void createGUI(){
   CashierAmount.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   CashierAmount.setOpaque(true);
   CashierAmount.addEventHandler(this, "CashierAmountText");
-  Presets = new GDropList(GUI, 325, 120, 90, 100, 4, 10);
+  Presets = new GDropList(GUI, 325, 120, 90, 120, 5, 10);
   Presets.setItems(loadStrings("list_409116"), 0);
   Presets.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   Presets.addEventHandler(this, "PresetsDropdown");
