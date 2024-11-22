@@ -31,7 +31,11 @@ public void Pause_Click(GButton source, GEvent event) { //_CODE_:Pause:413731:
 } //_CODE_:Pause:413731:
 
 public void Clear_Click(GButton source, GEvent event) { //_CODE_:Clear:949067:
-  clear();
+  for (Cashier cashier : cashiers) {
+    cashier.customersInLine.clear();
+    cashier.customersLeaving.clear();
+    //draw
+  }
 } //_CODE_:Clear:949067:
 
 public void CustomerInflowSlider(GSlider source, GEvent event) { //_CODE_:CustomerInflow:343922:
