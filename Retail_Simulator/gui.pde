@@ -50,9 +50,9 @@ public void CustomerPatienceSlider(GSlider source, GEvent event) { //_CODE_:Cust
   customerPatience = CustomerPatience.getValueI();
 } //_CODE_:CustomerPatience:911959:
 
-public void CustomerAggressionSlider(GSlider source, GEvent event) { //_CODE_:CustomerAggression:271313:
-  customerAggression = CustomerAggression.getValueI();
-} //_CODE_:CustomerAggression:271313:
+public void CustomerSpeedSlider(GSlider source, GEvent event) { //_CODE_:CustomerSpeed:271313:
+  customerSpeed = CustomerSpeed.getValueI();
+} //_CODE_:CustomerSpeed:271313:
 
 public void CashierAmountText(GTextField source, GEvent event) { //_CODE_:CashierAmount:904763:
   int cashierAmount = int(CashierAmount.getText());
@@ -65,7 +65,35 @@ public void CashierAmountText(GTextField source, GEvent event) { //_CODE_:Cashie
 } //_CODE_:CashierAmount:904763:
 
 public void PresetsDropdown(GDropList source, GEvent event) { //_CODE_:Presets:409116:
-  //Presets;
+  String selectedPreset = source.getSelectedText();
+  
+  switch (selectedPreset) {
+    case "Black Friday":
+    customerPatience = 1;
+    customerSpeed = 10;
+    cashierSpeed = 5;
+    customerInflow = 10;
+    break;
+  
+    case "Slow Tuesday":
+    customerPatience = 5;
+    customerSpeed = 1;
+    cashierSpeed = 1;
+    customerInflow = 1;
+    break;
+  
+    case "Normal Day":
+    customerPatience = 3;
+    customerSpeed = 5;
+    cashierSpeed = 3;
+    customerInflow = 5;
+    break;
+  }
+  
+  CustomerPatience.setValue(customerPatience);
+  CustomerSpeed.setValue(customerSpeed);
+  CashierSpeed.setValue(cashierSpeed);
+  CustomerInflow.setValue(customerInflow);
 } //_CODE_:Presets:409116:
 
 
@@ -121,25 +149,24 @@ public void createGUI(){
   CustomerPatience.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   CustomerPatience.setOpaque(false);
   CustomerPatience.addEventHandler(this, "CustomerPatienceSlider");
-  CustomerAggression = new GSlider(GUI, 320, 39, 100, 50, 10.0);
-  CustomerAggression.setShowValue(true);
-  CustomerAggression.setLimits(1, 1, 5);
-  CustomerAggression.setNbrTicks(5);
-  CustomerAggression.setShowTicks(true);
-  CustomerAggression.setNumberFormat(G4P.INTEGER, 0);
-  CustomerAggression.setLocalColorScheme(GCScheme.RED_SCHEME);
-  CustomerAggression.setOpaque(false);
-  CustomerAggression.addEventHandler(this, "CustomerAggressionSlider");
+  CustomerSpeed = new GSlider(GUI, 320, 39, 100, 50, 10.0);
+  CustomerSpeed.setShowValue(true);
+  CustomerSpeed.setLimits(5.0, 1.0, 10.0);
+  CustomerSpeed.setNbrTicks(5);
+  CustomerSpeed.setNumberFormat(G4P.DECIMAL, 0);
+  CustomerSpeed.setLocalColorScheme(GCScheme.RED_SCHEME);
+  CustomerSpeed.setOpaque(false);
+  CustomerSpeed.addEventHandler(this, "CustomerSpeedSlider");
   CustomerPatienceLabel = new GLabel(GUI, 160, 20, 120, 20);
   CustomerPatienceLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   CustomerPatienceLabel.setText("Customer Patience");
   CustomerPatienceLabel.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   CustomerPatienceLabel.setOpaque(false);
-  CustomerAggressionLabel = new GLabel(GUI, 305, 20, 130, 20);
-  CustomerAggressionLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  CustomerAggressionLabel.setText("Customer Aggression");
-  CustomerAggressionLabel.setLocalColorScheme(GCScheme.RED_SCHEME);
-  CustomerAggressionLabel.setOpaque(false);
+  CustomerSpeedLabel = new GLabel(GUI, 305, 20, 130, 20);
+  CustomerSpeedLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  CustomerSpeedLabel.setText("Customer Speed");
+  CustomerSpeedLabel.setLocalColorScheme(GCScheme.RED_SCHEME);
+  CustomerSpeedLabel.setOpaque(false);
   CashierAmountLabel = new GLabel(GUI, 20, 100, 100, 20);
   CashierAmountLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   CashierAmountLabel.setText("Cashier Amount");
@@ -172,9 +199,9 @@ GLabel CustomerSliderLabel;
 GLabel CashierLabel; 
 GSlider CashierSpeed; 
 GSlider CustomerPatience; 
-GSlider CustomerAggression; 
+GSlider CustomerSpeed; 
 GLabel CustomerPatienceLabel; 
-GLabel CustomerAggressionLabel; 
+GLabel CustomerSpeedLabel; 
 GLabel CashierAmountLabel; 
 GTextField CashierAmount; 
 GDropList Presets; 

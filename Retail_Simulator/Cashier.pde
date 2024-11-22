@@ -34,13 +34,13 @@ class Cashier {
       try{
         float customerAheadY = this.customersInLine.get( this.customersInLine.size()-1 ).pos.y;  // Getting the y coord of the customer ahead in line, if there is one
         if (customerAheadY >= diameter*1.5) {   // Draws a customer if the distance between the would be customer and the customer ahead of it is over/equal to 1.5 times the diameter
-          this.customersInLine.add(new Customer( new PVector (this.pos.x, -diameter*0.5), diameter, customerPatience, customerAggression)); 
+          this.customersInLine.add(new Customer( new PVector (this.pos.x, -diameter*0.5), diameter, customerPatience, customerSpeed)); 
         }
       }
         
       catch (Exception e) {  // If there is no customer ahead in line
         //try{  // Avoids errors from changing the cashier amount in the middle of generating customers
-          this.customersInLine.add(new Customer( new PVector (this.pos.x, -diameter*0.5), diameter, customerPatience, customerAggression)); //Draws a customer if there is no customer ahead in line
+          this.customersInLine.add(new Customer( new PVector (this.pos.x, -diameter*0.5), diameter, customerPatience, customerSpeed)); //Draws a customer if there is no customer ahead in line
         //}
         //catch (Exception f) {}
       }

@@ -5,7 +5,7 @@ class Customer {
   int diameter;
   int patience;
   int initialPatience; // Store the initial patience when the customer is created
-  int aggression;
+  float speed;
   
   boolean checkedOut;
   int timeArrivedAtCashier;
@@ -14,13 +14,13 @@ class Customer {
   int leftAmount;
   
   // CONSTRUCTOR
-  Customer (PVector xy, int d, int p, int a) {    
+  Customer (PVector xy, int d, int p, float s) {    
    this.colour = yellow;  // Default color for customer
    this.pos = xy;
    this.diameter = d;
    this.patience = p;
    this.initialPatience = p;
-   this.aggression = a;
+   this.speed = s;
    
    this.checkedOut = false;
    this.leaving = false;
@@ -35,7 +35,7 @@ class Customer {
   }
   
   void moveAhead() {
-    this.pos.y += 5;
+    this.pos.y += this.speed;
   }
   
   void wait (ArrayList<Customer> customersInLine, ArrayList<Customer> customersLeaving, int index) {
@@ -62,13 +62,8 @@ class Customer {
       
       if (tooClose == false && index != 0 && index != 1) {  // Make the customer leave if the customer leaving would not bump into another customer
       // Make the customer leave if they aren't first/second in line
-        if (int(random(0,6-aggression)) == 0) {
-          //fight
-        }
-        else {
-          checkedOut = true;
-          leaving = true;
-        }
+        checkedOut = true;
+        leaving = true;
       }
     }
     
@@ -82,16 +77,16 @@ class Customer {
   }
   
   void leaveLeft() {
-    this.leftAmount += 2.5;
+    this.leftAmount += this.speed/2;
   }
   
   void leaveUp() {
-    this.pos.y -= 2.5;
+    this.pos.y -= this.speed/2;
   }
   
   void customerUpdate() {
     this.patience = customerPatience;
-    this.aggression = customerAggression;
+    this.speed = customerSpeed;
   }
   
   

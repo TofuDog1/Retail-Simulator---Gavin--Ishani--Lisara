@@ -15,7 +15,7 @@ float lastCustomerTime;
 
 float customerInflow = 2;    // 0.1 - 10.0
 int customerPatience = 4;    // 1 - 5
-int customerAggression = 1;  // 1 - 5
+float customerSpeed = 5;     // 1.0 - 10.0
 
 
 void setup() {
